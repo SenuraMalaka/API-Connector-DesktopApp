@@ -6,19 +6,13 @@
 package api.connector.desktopapp.connectors;
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.ConnectException;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -76,6 +70,20 @@ public class HttpRequestsCon {
       rd.close();
       return result.toString();
    }
+    
+    
+      public void sendHttpPUT(String passedUrl, String content) throws Exception{
+        URL url = new URL(passedUrl);
+        HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+        httpCon.setDoOutput(true);
+        httpCon.setRequestMethod("PUT");
+        OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
+        out.write(content);
+        out.close();
+        httpCon.getInputStream();
+        System.out.println("Res Code PUT -"+httpCon.getResponseCode());
+        System.out.println("Res Message PUT -"+httpCon.getResponseMessage());
+    }
 
     
     
