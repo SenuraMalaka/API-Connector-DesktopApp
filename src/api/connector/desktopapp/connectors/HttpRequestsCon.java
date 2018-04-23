@@ -84,6 +84,18 @@ public class HttpRequestsCon {
         System.out.println("Res Code PUT -"+httpCon.getResponseCode());
         System.out.println("Res Message PUT -"+httpCon.getResponseMessage());
     }
+      
+      
+    private void sendHTTPDelete(String passedUrl) throws Exception{
+        URL url = new URL(passedUrl);
+        HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+        httpCon.setDoOutput(true);
+        httpCon.setRequestProperty(
+            "Content-Type", "application/json" );
+        httpCon.setRequestMethod("DELETE");
+        httpCon.connect();
+        System.out.println("Res Code PUT -"+httpCon.getResponseCode());
+    }
 
     
     
