@@ -26,10 +26,11 @@ public class APIConnectorDesktopApp {
         
         HttpRequestsCon httpCon=new HttpRequestsCon();
         
-            callGET(httpCon, "api/developers/31");
-            //callPOST(httpCon, "developers", "{\"name\":\"NewMemTest\"}");
+            //callGET(httpCon, "api/developers/31");
+            callPOST(httpCon, "developers","{\"name\":\"SampleDev\"}");
             //callDelete(httpCon, "tasks/1/1/044-24-2018");
         
+            
         
         
     }
@@ -41,23 +42,26 @@ public class APIConnectorDesktopApp {
     try {
             String res=httpCon.sendGET(APISettings.API_URL+passedURI); //httpCon.getFromGET("http://localhost:5000/api/developers/1");
             System.out.println("response is - "+res);
-        } 
-        catch (ConnectException ex) {
-            System.out.println(InfoMessages.dbOrApiIsOffline);
+        } catch (ConnectException ex) {
+            System.out.println(InfoMessages.ApiIsOffline);
+        }catch(java.io.IOException ex){
+            System.out.println(InfoMessages.DBIsOffline);
         }catch(Exception ex){
-            System.out.println(InfoMessages.errorMSGView+ex.getMessage());
+            System.out.println(InfoMessages.errorMSGView+ex.toString());
         }
     }
     
      private static void callPOST(HttpRequestsCon httpCon,String passedURI, String content){
-    try {
-            httpCon.sendPost(APISettings.API_URL+passedURI,content);
-        } 
-        catch (ConnectException ex) {
-            System.out.println(InfoMessages.dbOrApiIsOffline);
+      try {
+         httpCon.sendPOST(APISettings.API_URL+passedURI, content);
+        } catch (ConnectException ex) {
+            System.out.println(InfoMessages.ApiIsOffline);
+        }catch(java.io.IOException ex){
+            System.out.println(InfoMessages.DBIsOffline);
         }catch(Exception ex){
-            System.out.println(InfoMessages.errorMSGView+ex.getMessage());
+            System.out.println(InfoMessages.errorMSGView+ex.toString());
         }
+
     }
      
      
@@ -66,9 +70,11 @@ public class APIConnectorDesktopApp {
         try {
             httpCon.sendHTTPDelete(APISettings.API_URL+psdURI);
         }catch (ConnectException ex) {
-            System.out.println(InfoMessages.dbOrApiIsOffline);
+            System.out.println(InfoMessages.ApiIsOffline);
+        }catch(java.io.IOException ex){
+            System.out.println(InfoMessages.DBIsOffline);
         }catch(Exception ex){
-            System.out.println(InfoMessages.errorMSGView+ex.getMessage());
+            System.out.println(InfoMessages.errorMSGView+ex.toString());
         }
         
      }

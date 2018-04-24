@@ -11,7 +11,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 
 /**
@@ -19,47 +19,8 @@ import java.net.URLEncoder;
  * @author senura
  */
 public class HttpRequestsCon {
-    
-    //private static String API_URL="";
-        
-    
-    public void sendPost(String url,String content) throws Exception{
-        
-        System.out.println("url is => "+url);
-        System.out.println("content is => "+content);
-        String rawData = content;
-        String type = "application/json";
-         
-        String encodedData = URLEncoder.encode( rawData, "UTF-8" ); 
-        URL u;
-        u = new URL(url);
-         
-        HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-        conn.setDoOutput(true);
-        conn.setRequestMethod("POST");
-        conn.setRequestProperty( "Content-Type", type );
-        conn.setRequestProperty( "Content-Length", String.valueOf(encodedData.length()));
-        OutputStream os = conn.getOutputStream();
-        os.write(encodedData.getBytes());
-        
-       
-        System.out.println("Res code for POST is - "+conn.getResponseCode());
-        System.out.println("Res Message PUT - "+conn.getResponseMessage());
-        
-    } 
-    
-    
-    
-//    public String getFromGET(String urlToGET) throws Exception{
-//        
-//        URL url = new URL(urlToGET);
-//        HttpURLConnection conn =(HttpURLConnection) url.openConnection();
-//        InputStream is = conn.getInputStream();
-//        
-//        return null;
-//    }
-    
-    
+   
+   
     //working
     public String sendGET(String urlToRead) throws Exception {
       StringBuilder result = new StringBuilder();
@@ -104,6 +65,42 @@ public class HttpRequestsCon {
         httpCon.connect();
         System.out.println("Res Code DELETE - "+httpCon.getResponseCode());
     }
+    
+    
+    public void sendPOST(String passedUrl, String content) throws Exception{
+        byte[] out = content.getBytes(StandardCharsets.UTF_8);
+        int length = out.length;
+        
+         URL url = new URL(passedUrl);
+        HttpURLConnection http = (HttpURLConnection) url.openConnection();
+
+        http.setFixedLengthStreamingMode(length);
+        http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+        http.setDoOutput(true);
+        http.connect();
+        try(OutputStream os = http.getOutputStream()) {
+         os.write(out);
+        
+        
+            // Do something with http.getInputStream()
+            
+      BufferedReader rd = new BufferedReader(new InputStreamReader(http.getInputStream()));
+            
+      System.out.println("Res Code GET - "+http.getResponseCode());
+      System.out.println("New Developer Location is - "+http.getHeaderField("location"));
+            
+//      String line;
+//      StringBuilder result = new StringBuilder();
+//      while ((line = rd.readLine()) != null) {
+//         result.append(line);
+//      }
+//      rd.close();
+//            System.out.println("res is - "+result);
+        }
+            
+            
+    }
+
 
     
     

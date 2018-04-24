@@ -12,7 +12,8 @@ package language;
 public class InfoMessages {
     
     
-    public static final String dbOrApiIsOffline="Database Connection or API is Not Online";
+    public static final String ApiIsOffline="API is Not Online";
+    public static final String DBIsOffline="Database is Not Online";
     public static final String errorMSGView="Error Occurred - ";
     
 }
