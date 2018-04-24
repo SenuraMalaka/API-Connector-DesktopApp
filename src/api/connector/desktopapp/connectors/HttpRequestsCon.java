@@ -24,6 +24,9 @@ public class HttpRequestsCon {
         
     
     public void sendPost(String url,String content) throws Exception{
+        
+        System.out.println("url is => "+url);
+        System.out.println("content is => "+content);
         String rawData = content;
         String type = "application/json";
          
@@ -38,8 +41,10 @@ public class HttpRequestsCon {
         conn.setRequestProperty( "Content-Length", String.valueOf(encodedData.length()));
         OutputStream os = conn.getOutputStream();
         os.write(encodedData.getBytes());
-        int k= conn.getResponseCode();
-        System.out.println("Res code for POST is -"+k);
+        
+       
+        System.out.println("Res code for POST is - "+conn.getResponseCode());
+        System.out.println("Res Message PUT - "+conn.getResponseMessage());
         
     } 
     
@@ -55,14 +60,14 @@ public class HttpRequestsCon {
 //    }
     
     
-    
-    public String getHTML(String urlToRead) throws Exception {
+    //working
+    public String sendGET(String urlToRead) throws Exception {
       StringBuilder result = new StringBuilder();
       URL url = new URL(urlToRead);
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("GET");
       BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-      System.out.println("res code is - "+conn.getResponseCode());
+      System.out.println("Res Code GET - "+conn.getResponseCode());
       String line;
       while ((line = rd.readLine()) != null) {
          result.append(line);
@@ -70,6 +75,7 @@ public class HttpRequestsCon {
       rd.close();
       return result.toString();
    }
+    
     
     
       public void sendHttpPUT(String passedUrl, String content) throws Exception{
@@ -81,12 +87,14 @@ public class HttpRequestsCon {
         out.write(content);
         out.close();
         httpCon.getInputStream();
-        System.out.println("Res Code PUT -"+httpCon.getResponseCode());
-        System.out.println("Res Message PUT -"+httpCon.getResponseMessage());
+        System.out.println("Res Code PUT - "+httpCon.getResponseCode());
+        System.out.println("Res Message PUT - "+httpCon.getResponseMessage());
     }
       
-      
-    private void sendHTTPDelete(String passedUrl) throws Exception{
+    
+     //working
+    //para - "api/tasks/1/2/06-26-2018"
+    public void sendHTTPDelete(String passedUrl) throws Exception{
         URL url = new URL(passedUrl);
         HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
         httpCon.setDoOutput(true);
@@ -94,7 +102,7 @@ public class HttpRequestsCon {
             "Content-Type", "application/json" );
         httpCon.setRequestMethod("DELETE");
         httpCon.connect();
-        System.out.println("Res Code PUT -"+httpCon.getResponseCode());
+        System.out.println("Res Code DELETE - "+httpCon.getResponseCode());
     }
 
     

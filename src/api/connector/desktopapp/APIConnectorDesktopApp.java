@@ -5,8 +5,11 @@
  */
 package api.connector.desktopapp;
 
+import api.connector.desktopapp.connectors.APISettings;
 import api.connector.desktopapp.connectors.HttpRequestsCon;
 import java.net.ConnectException;
+import language.InfoMessages;
+
 
 
 /**
@@ -23,8 +26,9 @@ public class APIConnectorDesktopApp {
         
         HttpRequestsCon httpCon=new HttpRequestsCon();
         
-            callGET(httpCon);
-            //callPOST(httpCon);
+            callGET(httpCon, "api/developers/31");
+            //callPOST(httpCon, "developers", "{\"name\":\"NewMemTest\"}");
+            //callDelete(httpCon, "tasks/1/1/044-24-2018");
         
         
         
@@ -32,26 +36,40 @@ public class APIConnectorDesktopApp {
     
     
     
-    private static void callGET(HttpRequestsCon httpCon){
+    
+    private static void callGET(HttpRequestsCon httpCon, String passedURI){
     try {
-            String res=httpCon.getHTML("http://localhost:5000/api/developers/31"); //httpCon.getFromGET("http://localhost:5000/api/developers/1");
+            String res=httpCon.sendGET(APISettings.API_URL+passedURI); //httpCon.getFromGET("http://localhost:5000/api/developers/1");
             System.out.println("response is - "+res);
         } 
         catch (ConnectException ex) {
-            System.out.println("Database Connection Not Available Refused");
+            System.out.println(InfoMessages.dbOrApiIsOffline);
         }catch(Exception ex){
-            System.out.println("Error Occurred - "+ex.getMessage());
+            System.out.println(InfoMessages.errorMSGView+ex.getMessage());
         }
     }
     
-     private static void callPOST(HttpRequestsCon httpCon){
+     private static void callPOST(HttpRequestsCon httpCon,String passedURI, String content){
     try {
-            httpCon.sendPost("senuradissanayake.com", "");
+            httpCon.sendPost(APISettings.API_URL+passedURI,content);
         } 
         catch (ConnectException ex) {
-            System.out.println("Database Connection Not Available Refused");
+            System.out.println(InfoMessages.dbOrApiIsOffline);
         }catch(Exception ex){
-            System.out.println("Error Occurred - "+ex.getMessage());
+            System.out.println(InfoMessages.errorMSGView+ex.getMessage());
         }
     }
+     
+     
+     private static void callDelete(HttpRequestsCon httpCon,String psdURI){
+         
+        try {
+            httpCon.sendHTTPDelete(APISettings.API_URL+psdURI);
+        }catch (ConnectException ex) {
+            System.out.println(InfoMessages.dbOrApiIsOffline);
+        }catch(Exception ex){
+            System.out.println(InfoMessages.errorMSGView+ex.getMessage());
+        }
+        
+     }
 }
