@@ -21,22 +21,22 @@ public class APIConnectorDesktopApp {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        
-        
-        HttpRequestsCon httpCon=new HttpRequestsCon();
-        
-            //callGET(httpCon, "api/developers/31");
-            //callPOST(httpCon, "developers","{\"name\":\"SampleDev\"}");
-            //callDelete(httpCon, "tasks/1/1/044-24-2018");
-            
-            String putContent="{\"did\":1,\"pid\":1,\"date\":\"04/22/2018\",\"hours\":5,\"description\":\"worked 5 hours\"}";
-            callPUT(httpCon, "tasks", putContent);
-        
-            
-        
-        
-    }
+//    public static void main(String[] args) {
+//        
+//        
+//        HttpRequestsCon httpCon=new HttpRequestsCon();
+//        
+//            //callGET(httpCon, "api/developers/31");
+//            //callPOST(httpCon, "developers","{\"name\":\"SampleDev\"}");
+//            //callDelete(httpCon, "tasks/1/1/044-24-2018");
+//            
+//            String putContent="{\"did\":1,\"pid\":1,\"date\":\"04/22/2018\",\"hours\":5,\"description\":\"worked 5 hours\"}";
+//            callPUT(httpCon, "tasks", putContent);
+//        
+//            
+//        
+//        
+//    }
     
     
     
