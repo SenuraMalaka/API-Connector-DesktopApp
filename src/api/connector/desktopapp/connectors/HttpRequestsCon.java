@@ -12,6 +12,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Random;
 
 
 /**
@@ -38,18 +39,24 @@ public class HttpRequestsCon {
    }
     
     
-    
+      //working
+      //sampleCont - "{\"did\":1,\"pid\":1,\"date\":\"04/22/2018\",\"hours\":5,\"description\":\"worked 5 hours\"}"
       public void sendHttpPUT(String passedUrl, String content) throws Exception{
+
+        System.out.println(content);
+        Random random = new Random();
         URL url = new URL(passedUrl);
-        HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-        httpCon.setDoOutput(true);
-        httpCon.setRequestMethod("PUT");
-        OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
-        out.write(content);
-        out.close();
-        httpCon.getInputStream();
-        System.out.println("Res Code PUT - "+httpCon.getResponseCode());
-        System.out.println("Res Message PUT - "+httpCon.getResponseMessage());
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("PUT");
+        connection.setDoOutput(true);
+        connection.setRequestProperty("Content-Type", "application/json");
+        connection.setRequestProperty("Accept", "application/json");
+        OutputStreamWriter osw = new OutputStreamWriter(connection.getOutputStream());
+        osw.write(content);
+        osw.flush();
+        osw.close();
+        System.err.println(connection.getResponseCode());
+        
     }
       
     
@@ -67,6 +74,7 @@ public class HttpRequestsCon {
     }
     
     
+    //Working
     public void sendPOST(String passedUrl, String content) throws Exception{
         byte[] out = content.getBytes(StandardCharsets.UTF_8);
         int length = out.length;
@@ -88,14 +96,7 @@ public class HttpRequestsCon {
             
       System.out.println("Res Code GET - "+http.getResponseCode());
       System.out.println("New Developer Location is - "+http.getHeaderField("location"));
-            
-//      String line;
-//      StringBuilder result = new StringBuilder();
-//      while ((line = rd.readLine()) != null) {
-//         result.append(line);
-//      }
-//      rd.close();
-//            System.out.println("res is - "+result);
+
         }
             
             

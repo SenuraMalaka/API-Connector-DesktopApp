@@ -27,8 +27,11 @@ public class APIConnectorDesktopApp {
         HttpRequestsCon httpCon=new HttpRequestsCon();
         
             //callGET(httpCon, "api/developers/31");
-            callPOST(httpCon, "developers","{\"name\":\"SampleDev\"}");
+            //callPOST(httpCon, "developers","{\"name\":\"SampleDev\"}");
             //callDelete(httpCon, "tasks/1/1/044-24-2018");
+            
+            String putContent="{\"did\":1,\"pid\":1,\"date\":\"04/22/2018\",\"hours\":5,\"description\":\"worked 5 hours\"}";
+            callPUT(httpCon, "tasks", putContent);
         
             
         
@@ -62,6 +65,21 @@ public class APIConnectorDesktopApp {
             System.out.println(InfoMessages.errorMSGView+ex.toString());
         }
 
+    }
+     
+     
+     
+     private static void callPUT(HttpRequestsCon httpCon, String passedURI,String content){
+    try {
+            httpCon.sendHttpPUT(APISettings.API_URL+passedURI, content);
+
+        } catch (ConnectException ex) {
+            System.out.println(InfoMessages.ApiIsOffline);
+        }catch(java.io.IOException ex){
+            System.out.println(InfoMessages.DBIsOffline+ex.toString());
+        }catch(Exception ex){
+            System.out.println(InfoMessages.errorMSGView+ex.toString());
+        }
     }
      
      
