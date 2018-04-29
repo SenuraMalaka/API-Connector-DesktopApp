@@ -5,6 +5,9 @@
  */
 package Views;
 
+import api.connector.desktopapp.APIConnectorDesktopApp;
+import api.connector.desktopapp.connectors.HttpRequestsCon;
+
 /**
  *
  * @author senura
@@ -28,126 +31,137 @@ public class TaskReportWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField_did = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField_pid = new javax.swing.JTextField();
+        jTextField_endpoint = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField_date = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField_hours = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField_ot = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_output = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
+        jButton_get = new javax.swing.JButton();
+        jButton_post = new javax.swing.JButton();
+        jButton_post1 = new javax.swing.JButton();
+        jButton_post2 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea_ReqPayload = new javax.swing.JTextArea();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(600, 600));
         setMinimumSize(new java.awt.Dimension(600, 600));
+        getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
-        jLabel1.setText("Task Report");
+        jLabel1.setText("API Caller - IMAGINARy");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(80, 0, 440, 70);
 
-        jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel2.setText("Project ID");
+        jTextField_endpoint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_endpointActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField_endpoint);
+        jTextField_endpoint.setBounds(190, 110, 198, 49);
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel3.setText("Developer ID");
-
-        jLabel4.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel4.setText("Date");
-
-        jLabel5.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel5.setText("Total Hours");
-
-        jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel6.setText("OverTime Hours");
+        jLabel3.setText("API endpoint");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(230, 70, 151, 53);
 
         jTextArea_output.setColumns(20);
         jTextArea_output.setRows(5);
         jScrollPane1.setViewportView(jTextArea_output);
 
-        jLabel7.setText("Output");
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(20, 400, 570, 154);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(125, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_pid, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_did, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_date, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_hours, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_ot, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(117, 117, 117))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(272, 272, 272)
-                        .addComponent(jLabel7)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField_did, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField_pid, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField_date, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField_hours, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField_ot, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
-                .addGap(8, 8, 8)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
-        );
+        jLabel7.setText("Output");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(270, 370, 50, 16);
+
+        jButton_get.setText("GET");
+        jButton_get.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_getActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_get);
+        jButton_get.setBounds(90, 330, 65, 35);
+
+        jButton_post.setText("POST");
+        jButton_post.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_postActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_post);
+        jButton_post.setBounds(190, 330, 65, 35);
+
+        jButton_post1.setText("PUT");
+        jButton_post1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_post1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_post1);
+        jButton_post1.setBounds(290, 330, 65, 35);
+
+        jButton_post2.setText("DELETE");
+        jButton_post2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_post2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_post2);
+        jButton_post2.setBounds(390, 330, 100, 35);
+
+        jTextArea_ReqPayload.setColumns(20);
+        jTextArea_ReqPayload.setRows(5);
+        jScrollPane2.setViewportView(jTextArea_ReqPayload);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(20, 220, 540, 90);
+
+        jLabel8.setText("Request Payload");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(250, 200, 102, 16);
+
+        jLabel2.setText("Eg. http://localhost:5000/api/projects/track/2");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(140, 150, 310, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_getActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_getActionPerformed
+       
+        HttpRequestsCon httpCon=new HttpRequestsCon();
+        APIConnectorDesktopApp.callGET(httpCon, jTextField_endpoint.getText());
+        
+    }//GEN-LAST:event_jButton_getActionPerformed
+
+    private void jButton_postActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_postActionPerformed
+         HttpRequestsCon httpCon=new HttpRequestsCon();
+        APIConnectorDesktopApp.callPOST(httpCon, jTextField_endpoint.getText(),jTextArea_ReqPayload.getText());
+        
+    }//GEN-LAST:event_jButton_postActionPerformed
+
+    private void jButton_post1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_post1ActionPerformed
+        HttpRequestsCon httpCon=new HttpRequestsCon();
+        APIConnectorDesktopApp.callPUT(httpCon, jTextField_endpoint.getText(),jTextArea_ReqPayload.getText());
+        
+    }//GEN-LAST:event_jButton_post1ActionPerformed
+
+    private void jButton_post2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_post2ActionPerformed
+        
+        HttpRequestsCon httpCon=new HttpRequestsCon();
+        APIConnectorDesktopApp.callDelete(httpCon, jTextField_endpoint.getText());
+         
+    }//GEN-LAST:event_jButton_post2ActionPerformed
+
+    private void jTextField_endpointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_endpointActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_endpointActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,19 +199,19 @@ public class TaskReportWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_get;
+    private javax.swing.JButton jButton_post;
+    private javax.swing.JButton jButton_post1;
+    private javax.swing.JButton jButton_post2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea_output;
-    private javax.swing.JTextField jTextField_date;
-    private javax.swing.JTextField jTextField_did;
-    private javax.swing.JTextField jTextField_hours;
-    private javax.swing.JTextField jTextField_ot;
-    private javax.swing.JTextField jTextField_pid;
+    private javax.swing.JScrollPane jScrollPane2;
+    public static javax.swing.JTextArea jTextArea_ReqPayload;
+    public static javax.swing.JTextArea jTextArea_output;
+    private javax.swing.JTextField jTextField_endpoint;
     // End of variables declaration//GEN-END:variables
 }

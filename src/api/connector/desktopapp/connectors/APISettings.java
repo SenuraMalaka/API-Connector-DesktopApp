@@ -11,6 +11,6 @@ package api.connector.desktopapp.connectors;
  */
 public class APISettings {
     
-    public static final String API_URL="http://localhost:5000/api/";
+    public static final String API_URL="";//It's better if this has the hostname and Port num.
     
 }

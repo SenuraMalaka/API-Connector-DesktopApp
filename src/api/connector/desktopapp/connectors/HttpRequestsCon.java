@@ -24,6 +24,7 @@ public class HttpRequestsCon {
    
     //working
     public String sendGET(String urlToRead) throws Exception {
+        System.out.println("\nurls is"+urlToRead);
       StringBuilder result = new StringBuilder();
       URL url = new URL(urlToRead);
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();

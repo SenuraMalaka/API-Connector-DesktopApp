@@ -5,9 +5,12 @@
  */
 package api.connector.desktopapp;
 
+import Views.*;
+//import Views.Tas;
 import api.connector.desktopapp.connectors.APISettings;
 import api.connector.desktopapp.connectors.HttpRequestsCon;
 import java.net.ConnectException;
+import javax.swing.JTextArea;
 import language.InfoMessages;
 
 
@@ -40,59 +43,82 @@ public class APIConnectorDesktopApp {
     
     
     
+    public static void setMsgText(String textContent){
+        
+        
+        TaskReportWindow.jTextArea_output.setText(TaskReportWindow.jTextArea_output.getText()+"\n"+textContent);
+        
+        
+    }
     
-    private static void callGET(HttpRequestsCon httpCon, String passedURI){
+    
+    
+    
+    public static void callGET(HttpRequestsCon httpCon, String passedURI){
     try {
             String res=httpCon.sendGET(APISettings.API_URL+passedURI); //httpCon.getFromGET("http://localhost:5000/api/developers/1");
             System.out.println("response is - "+res);
-        } catch (ConnectException ex) {
-            System.out.println(InfoMessages.ApiIsOffline);
+            TaskReportWindow.jTextArea_output.setText("response is - "+res);
+        }catch (ConnectException ex) {
+            //System.out.println(InfoMessages.ApiIsOffline);
+            TaskReportWindow.jTextArea_output.setText(TaskReportWindow.jTextArea_output.getText()+"\n"+InfoMessages.ApiIsOffline);
         }catch(java.io.IOException ex){
-            System.out.println(InfoMessages.DBIsOffline);
+            //System.out.println(InfoMessages.DBIsOffline);
+            TaskReportWindow.jTextArea_output.setText(TaskReportWindow.jTextArea_output.getText()+"\n"+InfoMessages.DBIsOffline);
         }catch(Exception ex){
-            System.out.println(InfoMessages.errorMSGView+ex.toString());
+            //System.out.println(InfoMessages.errorMSGView+ex.toString());
+            TaskReportWindow.jTextArea_output.setText(TaskReportWindow.jTextArea_output.getText()+"\n"+InfoMessages.errorMSGView+ex.toString());
         }
     }
     
-     private static void callPOST(HttpRequestsCon httpCon,String passedURI, String content){
+     public static void callPOST(HttpRequestsCon httpCon,String passedURI, String content){
       try {
          httpCon.sendPOST(APISettings.API_URL+passedURI, content);
         } catch (ConnectException ex) {
-            System.out.println(InfoMessages.ApiIsOffline);
+            //System.out.println(InfoMessages.ApiIsOffline);
+            TaskReportWindow.jTextArea_output.setText(TaskReportWindow.jTextArea_output.getText()+"\n"+InfoMessages.ApiIsOffline);
         }catch(java.io.IOException ex){
-            System.out.println(InfoMessages.DBIsOffline);
+            //System.out.println(InfoMessages.DBIsOffline);
+            TaskReportWindow.jTextArea_output.setText(TaskReportWindow.jTextArea_output.getText()+"\n"+InfoMessages.DBIsOffline);
         }catch(Exception ex){
-            System.out.println(InfoMessages.errorMSGView+ex.toString());
+            //System.out.println(InfoMessages.errorMSGView+ex.toString());
+            TaskReportWindow.jTextArea_output.setText(TaskReportWindow.jTextArea_output.getText()+"\n"+InfoMessages.errorMSGView+ex.toString());
         }
 
     }
      
      
      
-     private static void callPUT(HttpRequestsCon httpCon, String passedURI,String content){
+     public static void callPUT(HttpRequestsCon httpCon, String passedURI,String content){
     try {
             httpCon.sendHttpPUT(APISettings.API_URL+passedURI, content);
 
-        } catch (ConnectException ex) {
-            System.out.println(InfoMessages.ApiIsOffline);
+        }catch (ConnectException ex) {
+            //System.out.println(InfoMessages.ApiIsOffline);
+            TaskReportWindow.jTextArea_output.setText(TaskReportWindow.jTextArea_output.getText()+"\n"+InfoMessages.ApiIsOffline);
         }catch(java.io.IOException ex){
-            System.out.println(InfoMessages.DBIsOffline+ex.toString());
+            //System.out.println(InfoMessages.DBIsOffline);
+            TaskReportWindow.jTextArea_output.setText(TaskReportWindow.jTextArea_output.getText()+"\n"+InfoMessages.DBIsOffline);
         }catch(Exception ex){
-            System.out.println(InfoMessages.errorMSGView+ex.toString());
+            //System.out.println(InfoMessages.errorMSGView+ex.toString());
+            TaskReportWindow.jTextArea_output.setText(TaskReportWindow.jTextArea_output.getText()+"\n"+InfoMessages.errorMSGView+ex.toString());
         }
     }
      
      
-     private static void callDelete(HttpRequestsCon httpCon,String psdURI){
+     public static void callDelete(HttpRequestsCon httpCon,String psdURI){
          
         try {
             httpCon.sendHTTPDelete(APISettings.API_URL+psdURI);
         }catch (ConnectException ex) {
-            System.out.println(InfoMessages.ApiIsOffline);
+            //System.out.println(InfoMessages.ApiIsOffline);
+            TaskReportWindow.jTextArea_output.setText(TaskReportWindow.jTextArea_output.getText()+"\n"+InfoMessages.ApiIsOffline);
         }catch(java.io.IOException ex){
-            System.out.println(InfoMessages.DBIsOffline);
+            //System.out.println(InfoMessages.DBIsOffline);
+            TaskReportWindow.jTextArea_output.setText(TaskReportWindow.jTextArea_output.getText()+"\n"+InfoMessages.DBIsOffline);
         }catch(Exception ex){
-            System.out.println(InfoMessages.errorMSGView+ex.toString());
+            //System.out.println(InfoMessages.errorMSGView+ex.toString());
+            TaskReportWindow.jTextArea_output.setText(TaskReportWindow.jTextArea_output.getText()+"\n"+InfoMessages.errorMSGView+ex.toString());
         }
         
      }
